@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.VR;
 using System.Runtime.InteropServices;
@@ -15,7 +15,6 @@ namespace TButt
         private static bool _usesNativeIntegration;
         private static int _refreshRate;
         private static bool _supportsPositionTracking;
-        private static float _maxTimestepRatio = 1f; // adjust this to change relationship between physics timestep and framerate. 1:1 relationship by default.
         private static Color32 _defaultFadeColor = Color.black;
         private static bool _initialized = false;
 
@@ -24,8 +23,8 @@ namespace TButt
             if (_initialized)
                 return;
             GetHMDProfile();
-            Time.maximumDeltaTime = 1 / (_maxTimestepRatio * (float)_refreshRate);
             Time.fixedDeltaTime = 1 / (float)_refreshRate;
+            Time.maximumDeltaTime = Time.fixedDeltaTime;
 
             #if STEAM_VR
             //  SteamVR_Fade.View(defaultFadeColor, 1f);
@@ -77,7 +76,10 @@ namespace TButt
             _supportsPositionTracking = false;
 
             #elif RIFT
-            _refreshRate = (int)UnityEngine.VR.VRDevice.refreshRate;
+             if (UnityEngine.VR.VRDevice.model == "Oculus Rift DK2")
+                _refreshRate = 75;
+            else
+                _refreshRate = 90;
             _supportsPositionTracking = OVRPlugin.positionSupported;
 
             #elif STEAM_VR
@@ -87,30 +89,12 @@ namespace TButt
         }
 
         /// <summary>
-        /// Optional. Increase max physics timestep if you can't hit frametime everywhere. Best to leave 1:1 if possible.
-        /// </summary>
-        /// <param name="t">Ratio to multiply by timestep (0.5 to 1)</param>
-        public static void SetMaxTimestep(float t)
-        {
-            _maxTimestepRatio = t;
-        }
-
-        /// <summary>
         /// Returns fixed timestep based on the HMD's refresh rate.
         /// </summary>
         /// <returns></returns>
         public static float GetFixedTimestep()
         {
             return 1f / _refreshRate;
-        }
-
-        /// <summary>
-        /// Returns the max allowed timestep based on the HMD's refresh rate.
-        /// </summary>
-        /// <returns></returns>
-        public static float GetMaxAllowedTimestep()
-        {
-            return GetFixedTimestep() * _maxTimestepRatio;
         }
 
         public static bool HasPositionalTracking()
