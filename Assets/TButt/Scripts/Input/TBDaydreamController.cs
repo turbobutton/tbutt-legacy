@@ -606,7 +606,7 @@ namespace TButt
         private static bool GetSteamVRButtonDown(TBAVRInputType inputType)
         {
             // if the device is not connected, return false
-            if ((int)TBSteamVRDeviceManager.GetFirstController().index < 0)
+            if (!TBSteamVRDeviceManager.IsDeviceConnected(TBSteamVRDeviceManager.DeviceType.AnyController))
             {
                 return false;
             }
@@ -628,7 +628,7 @@ namespace TButt
         private static bool GetSteamVRButtonUp(TBAVRInputType inputType)
         {
             // if the device is not connected, return false
-            if ((int)TBSteamVRDeviceManager.GetFirstController().index < 0)
+            if (!TBSteamVRDeviceManager.IsDeviceConnected(TBSteamVRDeviceManager.DeviceType.AnyController))
             {
                 return false;
             }
