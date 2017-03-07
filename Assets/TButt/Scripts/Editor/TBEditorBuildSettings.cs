@@ -183,13 +183,13 @@ namespace TButt.Editor
                 if(daydreamControlSettings == DaydreamControlSettings.Rift)
                 {
                     string[] assets2 = AssetDatabase.FindAssets("OVRCameraRig", new string[] { "Assets" });
-                    if (assets.Length == 0)
+                    if (assets2.Length == 0)
                         EditorGUILayout.HelpBox("Oculus Plugin not detected! Please import the Oculus SDK to your project before continuing. See https://developer3.oculus.com/downloads/", UnityEditor.MessageType.Error);
                 }
                 else if(daydreamControlSettings == DaydreamControlSettings.SteamVR)
                 {
                     string[] assets2 = AssetDatabase.FindAssets("SteamVR_Camera", new string[] { "Assets" });
-                    if (assets.Length == 0)
+                    if (assets2.Length == 0)
                         EditorGUILayout.HelpBox("Steam VR Plugin not detected. Please install Steam VR from the asset store before continuing.", UnityEditor.MessageType.Error);
                 }
             }
