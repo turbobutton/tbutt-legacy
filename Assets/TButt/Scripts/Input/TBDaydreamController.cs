@@ -805,5 +805,14 @@ namespace TButt
         AppButton,
         Touchpad
     }
+
+
+    public enum TBTouchpadSwipe
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
 }
 #endif
