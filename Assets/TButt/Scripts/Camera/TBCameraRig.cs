@@ -299,13 +299,27 @@ namespace TButt
 
         private void SyncCameraSettings(Camera cam)
         {
-            cam.clearFlags = clearFlags;
-            cam.cullingMask = cullingMask;
-            cam.nearClipPlane = nearClipPlane;
-            cam.farClipPlane = farClipPlane;
-            cam.backgroundColor = backgroundColor;
-            cam.useOcclusionCulling = useOcclusionCulling;
-            cam.opaqueSortMode = sortMode;
+            if(cam.clearFlags != clearFlags) { 
+                cam.clearFlags = clearFlags;
+            }
+            if(cam.cullingMask != cullingMask) {
+                cam.cullingMask = cullingMask;
+            }
+            if(cam.nearClipPlane != nearClipPlane) {
+                cam.nearClipPlane = nearClipPlane;
+            }
+            if(cam.farClipPlane != farClipPlane) {
+                cam.farClipPlane = farClipPlane;
+            }
+            if(cam.backgroundColor != backgroundColor) {
+                cam.backgroundColor = backgroundColor;
+            }
+            if(cam.useOcclusionCulling != useOcclusionCulling) {
+                cam.useOcclusionCulling = useOcclusionCulling;
+            }
+            if(cam.opaqueSortMode != sortMode) {
+                cam.opaqueSortMode = sortMode;
+            }
         }
 
         public Transform GetTBCenter()
